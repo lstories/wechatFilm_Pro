@@ -1,0 +1,42 @@
+# database
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz90cl554q5lhgjx3fo.mysql.rds.aliyuncs.com/db_film?serverTimezone=GMT%2b8
+    username: qupai_test
+    password: x@j9k*4d!@jW8B3
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  # redis
+#  reids:
+#    host: 127.0.0.1
+#    port: 6379
+#      # ??????0 - 15?
+#      database: 0
+#      # ??????????
+#      timeout: 10000
+#      # lettuce ??
+#      lettuce:
+#        pool:
+#          # ?????(??????????) ??? 8
+#          max-active: 10
+#          # ????????(??????????) ??? -1 ms
+#          max-wait: -1
+#          # ?????? ??? 8
+#          max-idle: 5
+#          # ?????? ??? 0
+#          min-idle: 0
+
+server:
+  port: 8085
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+

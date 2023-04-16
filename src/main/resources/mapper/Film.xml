@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatfilm.mapper.FilmMapper">
+    <!--  新增  -->
+    <insert id="addFilm">
+        insert into film(id, filmName, category, time, profiles, actor, director, pic, price, video)
+        value (#{id}, #{filmName}, #{category}, #{time}, #{profiles}, #{actor}, #{director}, #{pic}, #{price}, #{video})
+    </insert>
+    <!--  查询列表  -->
+    <select id="listFilms" resultType="com.wechatfilm.entity.Film">
+        select * from film order by id desc
+    </select>
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatfilm.entity.Film">
+        select * from film
+            <where>
+                <if test="filmName != null and filmName != ''">
+                    filmName like concat('%', #{filmName}, '%')
+                </if>
+            </where>
+        order by id desc
+    </select>
+    <!--  通过Id来查询  -->
+    <select id="getByFilmId" resultType="com.wechatfilm.entity.Film">
+        select * from film where id = #{id}
+    </select>
+
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateFilmById">
+        update film set filmName = #{filmName}, category = #{category},time = #{time}, profiles = #{profiles},
+                        actor = #{actor}, director = #{director}, pic = #{pic}, price = #{price}, video = #{video}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除  -->
+    <delete id="deleteFilmById">
+        delete from film where id = #{id}
+    </delete>
+    <!--  查询评分最高的前10个  -->
+    <select id="heightTen" resultType="com.wechatfilm.entity.Film">
+        SELECT * FROM `film` order by score desc limit 0,10
+    </select>
+   <!--  通过分类查询  -->
+    <select id="filmsCategory" resultType="com.wechatfilm.entity.Film">
+        select * from film
+        <where>
+            <if test="filmName != null and filmName != ''">
+                filmName like concat('%', #{filmName}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                category like concat('%', #{category}, '%')
+            </if>
+        </where>
+        order by price desc
+    </select>
+    <!--  通过分类查找  -->
+    <select id="byCategory" resultType="com.wechatfilm.entity.Film">
+        select * from film where category = #{category}
+        order by price desc
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

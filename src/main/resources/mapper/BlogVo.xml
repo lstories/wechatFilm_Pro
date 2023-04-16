@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatfilm.mapper.BlogMapper">
+    <!--  查询列表  -->
+    <select id="listBlog" resultType="com.wechatfilm.entity.Vo.BlogVo">
+
+    </select>
+
+    <!--  分页查询  -->
+    <select id="BlogPage" resultType="com.wechatfilm.entity.Vo.BlogVo">
+
+    </select>
+
+    <!--  新增回帖  -->
+    <insert id="addAnswer">
+
+    </insert>
+    <!--  新增帖子  -->
+    <insert id="addBlog">
+
+    </insert>
+
+    <!--  通过id删除帖子  -->
+    <delete id="deleteBlog">
+
+    </delete>
+
+    <!--  通过id删除回帖  -->
+    <delete id="deleteAnswer">
+
+    </delete>
+
+    <!--  修改帖子  -->
+    <update id="updateBlog">
+
+    </update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
