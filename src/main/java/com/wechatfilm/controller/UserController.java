@@ -76,7 +76,37 @@ public class UserController {
         return Result.success();
     }
 
-
+    // 根据年份查询18-23
+    @GetMapping("/year18")
+    public Result getUserNum_18() {
+        List<User> users = userService.getUserNum_18();
+        return Result.success(users);
+    }
+    @GetMapping("/year19")
+    public Result getUserNum_19() {
+        List<User> users = userService.getUserNum_19();
+        return Result.success(users);
+    }
+    @GetMapping("/year20")
+    public Result getUserNum_20() {
+        List<User> users = userService.getUserNum_20();
+        return Result.success(users);
+    }
+    @GetMapping("/year21")
+    public Result getUserNum_21() {
+        List<User> users = userService.getUserNum_21();
+        return Result.success(users);
+    }
+    @GetMapping("/year22")
+    public Result getUserNum_22() {
+        List<User> users = userService.getUserNum_22();
+        return Result.success(users);
+    }
+    @GetMapping("/year23")
+    public Result getUserNum_23() {
+        List<User> users = userService.getUserNum_23();
+        return Result.success(users);
+    }
 
 
 

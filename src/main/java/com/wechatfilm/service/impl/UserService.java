@@ -86,14 +86,48 @@ public class UserService implements IUserService {
         if (!UserPassword.equals(user.getPassword())) {
             throw new ServiceException("用户名或密码错误");
         }
-
         UserLoginDTO loginDTO = new UserLoginDTO();
         BeanUtils.copyProperties(user, loginDTO);
-
         // 生成token
         String token = TokenUtils.getUserToken(String.valueOf(user.getUserId()), user.getPassword());
         loginDTO.setToken(token);
         return loginDTO;
+    }
+
+    // 18年
+    @Override
+    public List<User> getUserNum_18() {
+        return userMapper.getUserNum_18();
+    }
+
+    // 19年
+    @Override
+    public List<User> getUserNum_19() {
+        return userMapper.getUserNum_19();
+    }
+
+    // 20年
+    @Override
+    public List<User> getUserNum_20() {
+        return userMapper.getUserNum_20();
+    }
+
+    // 21年
+    @Override
+    public List<User> getUserNum_21() {
+        return userMapper.getUserNum_21();
+    }
+
+    // 22年
+    @Override
+    public List<User> getUserNum_22() {
+        return userMapper.getUserNum_22();
+    }
+
+    // 23年
+    @Override
+    public List<User> getUserNum_23() {
+        return userMapper.getUserNum_23();
     }
 
 }

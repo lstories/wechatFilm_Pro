@@ -39,6 +39,23 @@ public interface UserMapper {
     // 通过查找username来判断登录
     User getByUserName(String username);
 
+    // 18年注册数量
+    List<User> getUserNum_18();
+
+    // 19年注册数量
+    List<User> getUserNum_19();
+
+    // 20年注册数量
+    List<User> getUserNum_20();
+
+    // 21年注册数量
+    List<User> getUserNum_21();
+
+    // 22年注册数量
+    List<User> getUserNum_22();
+
+    // 23年注册数量
+    List<User> getUserNum_23();
 
 }
 

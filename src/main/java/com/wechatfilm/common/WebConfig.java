@@ -9,23 +9,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
     @Autowired
     JwtInterceptor jwtInterceptor;
-
-
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         // 指定controller统一的接口
         configurer.addPathPrefix("/api", clazz -> clazz.isAnnotationPresent(RestController.class));
     }
-
-
     // 加自定义拦截器JwtInterceptor，设置拦截规则
     // excludePathPatterns放开登录接口, 一开始没有token
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/admin/**").excludePathPatterns("/api/admin/login");
     }
-
 }

@@ -60,7 +60,7 @@ resultType 是对象 entity对应的实体类路径
                 category like concat('%', #{category}, '%')
             </if>
         </where>
-        order by price desc
+        order by price ASC
     </select>
     <!--  通过分类查找  -->
     <select id="byCategory" resultType="com.wechatfilm.entity.Film">

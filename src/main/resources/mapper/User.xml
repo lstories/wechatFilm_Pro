@@ -59,6 +59,35 @@ resultType 是对象 entity对应的实体类路径
     <select id="getByUserName" resultType="com.wechatfilm.entity.User">
         select * from usertable where username = #{username}
     </select>
+    <!--  18年注册数量  -->
+    <select id="getUserNum_18" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2018'
+    </select>
+
+    <!--  19年注册数量  -->
+    <select id="getUserNum_19" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2019'
+    </select>
+
+    <!--  20年注册数量  -->
+    <select id="getUserNum_20" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2020'
+    </select>
+
+    <!--  21年注册数量  -->
+    <select id="getUserNum_21" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2021'
+    </select>
+
+    <!--  22年注册数量  -->
+    <select id="getUserNum_22" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2022'
+    </select>
+
+    <!--  23年注册数量  -->
+    <select id="getUserNum_23" resultType="com.wechatfilm.entity.User">
+        select * from usertable where date_format(createtime,'%Y')='2023'
+    </select>
 
 </mapper>
 

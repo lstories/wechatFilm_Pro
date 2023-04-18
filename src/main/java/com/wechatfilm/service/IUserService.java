@@ -33,4 +33,22 @@ public interface IUserService {
     // 登录
     UserLoginDTO login(UserLoginRequest userLoginRequest);
 
+    // 18年用户数量
+    List<User> getUserNum_18();
+
+    // 19年用户数量
+    List<User> getUserNum_19();
+
+    // 20年用户数量
+    List<User> getUserNum_20();
+
+    // 21年用户数量
+    List<User> getUserNum_21();
+
+    // 22年用户数量
+    List<User> getUserNum_22();
+
+    // 23年用户数量
+    List<User> getUserNum_23();
+
 }

@@ -33,28 +33,28 @@ public class CategoryController {
         return Result.success(categoryService.Page(pageRequest));
     }
 
-    // 新增用户
+    // 新增
     @PostMapping("/add")
     public Result add(@RequestBody Category category) {
         categoryService.add(category);
         return Result.success();
     }
 
-    // 通过查adminId 返回到页面对应的位置的数据
+    // 通过查Id 返回到页面对应的位置的数据
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id) {
         Category category = categoryService.getById(id);
         return Result.success(category);
     }
 
-    // 更新修改后的用户信息
+    // 更新修改后的信息
     @PutMapping("/update")
     public Result update(@RequestBody Category category){
         categoryService.updateById(category);
         return Result.success();
     }
 
-    // 根据id删除用户
+    // 根据id删除
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id) {
         categoryService.deleteById(id);
@@ -65,8 +65,6 @@ public class CategoryController {
     @GetMapping("tree")
     public Result tree() {
         List<Category> list = categoryService.list();
-        // 对list操作
-
         return Result.success(createTree(null, list));
     }
 

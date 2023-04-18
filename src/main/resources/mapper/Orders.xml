@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wechatfilm.mapper.OrdersMapper">
+    <!--  新增  -->
+    <insert id="addOrders">
+        insert into orders(id, code, userid, filmid, roomid, price, brand, begintime, endtime, captcha, status, o_score, comment)
+        value (#{id}, #{code}, #{userid}, #{filmid}, #{roomid}, #{price}, #{brand}, #{begintime}, #{endtime}, #{captcha}, #{status}, #{o_score}, #{comment})
+    </insert>
+    <!--  查询列表  -->
+    <select id="listOrders" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        select o.*, u.name, f.filmName, r.styleBrand, r.spaceBrand from orders o
+            left join usertable u on u.userId = o.userid
+            left join film f on f.id = o.filmid
+            left join room r on r.id = o.roomid
+        order by id desc
+    </select>
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        select o.*, u.name, f.filmName, f.pic filmPic, r.styleBrand, r.spaceBrand from orders o
+            left join usertable u on u.userId = o.userid
+            left join film f on f.id = o.filmid
+            left join room r on r.id = o.roomid
+            <where>
+                <if test="name != null and name != ''">
+                    u.name like concat('%', #{name}, '%')
+                </if>
+                <if test="filmName != null and filmName != ''">
+                    and f.filmName like concat('%', #{filmName}, '%')
+                </if>
+                <if test="userid != null and userid != ''">
+                    and o.userid like concat('%', #{userid}, '%')
+                </if>
+                <if test="status != null and status != ''">
+                    and o.status = #{status}
+                </if>
+            </where>
+        order by id desc
+    </select>
+    <!--  通过Id来查询  -->
+    <select id="getByOrdersId" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        select o.*, u.name, f.filmName, r.styleBrand, r.spaceBrand from orders o
+            left join usertable u on u.userId = o.userid
+            left join film f on f.id = o.filmid
+            left join room r on r.id = o.roomid
+        where o.id = #{id}
+    </select>
+
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateOrdersById">
+        update orders set status = #{status}, o_score = #{o_score}, comment = #{comment}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除  -->
+    <delete id="deleteOrdersById">
+        delete from orders where id = #{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

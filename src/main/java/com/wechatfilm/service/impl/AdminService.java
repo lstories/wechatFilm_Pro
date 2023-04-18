@@ -95,7 +95,6 @@ public class AdminService implements IAdminService {
         String token = TokenUtils.genToken(String.valueOf(admin.getAdminId()), admin.getPassword());
         loginDTO.setToken(token);
 
-
         return loginDTO;
     }
 

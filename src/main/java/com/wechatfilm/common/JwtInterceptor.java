@@ -31,12 +31,11 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (StrUtil.isBlank(token)) {
             token = request.getParameter("token");
         }
-
         // 执行认证
         if (StrUtil.isBlank(token)) {
             throw new ServiceException(ERROR_CODE_401, "无token，请重新登录");
         }
-        // 获取 token 中的adminId
+        // 获取 token 中的Id
         String adminId;
         Admin admin;
         try {

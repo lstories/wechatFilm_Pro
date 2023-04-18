@@ -1,6 +1,5 @@
 package com.wechatfilm.controller;
 
-
 import com.wechatfilm.common.Result;
 import com.wechatfilm.controller.request.FilmPageRequest;
 import com.wechatfilm.entity.Film;
@@ -9,7 +8,6 @@ import com.wechatfilm.utils.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import java.io.IOException;
 import java.util.List;
