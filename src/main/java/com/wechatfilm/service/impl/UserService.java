@@ -130,4 +130,17 @@ public class UserService implements IUserService {
         return userMapper.getUserNum_23();
     }
 
+    @Override
+    public Object usernamePhone(UserPageRequest userPageRequest) {
+        PageHelper.startPage(userPageRequest.getPageNum(), userPageRequest.getPageSize());
+        List<User> users = userMapper.usernamePhone(userPageRequest);// 按条件查找
+        return new PageInfo<>(users);
+    }
+
+    // 忘记密码
+    @Override
+    public void resetPwd(User user) {
+        userMapper.resetPwd(user);
+    }
+
 }

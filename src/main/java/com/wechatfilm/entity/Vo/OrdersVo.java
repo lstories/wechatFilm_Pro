@@ -42,4 +42,7 @@ public class OrdersVo {
     private String styleBrand;  // 影房主题
     private String spaceBrand;  // 空间大小
 
+    private Integer userNum;    // 购买次数
+    private BigDecimal sumPrice;    // 总价格
+
 }

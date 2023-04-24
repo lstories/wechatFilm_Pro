@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service    // 注释,标注为spring的组件,才能被调用
 public class FilmService implements IFilmService {
 

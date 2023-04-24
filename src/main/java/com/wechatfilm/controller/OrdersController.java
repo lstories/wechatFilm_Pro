@@ -62,6 +62,11 @@ public class OrdersController {
         return Result.success();
     }
 
+    // 前十排行榜
+    @GetMapping("/tenHeight")
+    public Result getTenHeightList() {
+         return Result.success(ordersService.getTenHeightList());
+    }
 
 
 

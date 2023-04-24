@@ -60,5 +60,11 @@ public class OrdersService implements IOrdersService {
         ordersMapper.deleteOrdersById(id);
     }
 
+    // 查询排行帮，消费次数前十的和金额
+    @Override
+    public List<OrdersVo> getTenHeightList() {
+        return ordersMapper.getTenHeightList();
+    }
+
 
 }

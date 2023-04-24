@@ -51,4 +51,10 @@ public interface IUserService {
     // 23年用户数量
     List<User> getUserNum_23();
 
+    // 查询手机号、用户吗
+    Object usernamePhone(UserPageRequest userPageRequest);
+
+    // 忘记密码
+    void resetPwd(User user);
+
 }

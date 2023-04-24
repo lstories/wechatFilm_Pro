@@ -59,6 +59,7 @@ resultType 是对象 entity对应的实体类路径
     <select id="getByUserName" resultType="com.wechatfilm.entity.User">
         select * from usertable where username = #{username}
     </select>
+
     <!--  18年注册数量  -->
     <select id="getUserNum_18" resultType="com.wechatfilm.entity.User">
         select * from usertable where date_format(createtime,'%Y')='2018'
@@ -88,6 +89,24 @@ resultType 是对象 entity对应的实体类路径
     <select id="getUserNum_23" resultType="com.wechatfilm.entity.User">
         select * from usertable where date_format(createtime,'%Y')='2023'
     </select>
+
+
+    <!--  注册查询手机号、用户吗  -->
+    <select id="usernamePhone" resultType="com.wechatfilm.entity.User">
+        select * from usertable
+        <where>
+            <if test="phone != null and phone != ''">
+                phone like concat('%', #{phone}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!--  忘记密码  -->
+    <update id="resetPwd">
+        update usertable
+        set password = #{password}
+        where username = #{username}
+    </update>
 
 </mapper>
 

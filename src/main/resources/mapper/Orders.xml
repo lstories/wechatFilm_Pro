@@ -57,6 +57,18 @@
     <delete id="deleteOrdersById">
         delete from orders where id = #{id}
     </delete>
+
+    <!-- 查询排行帮，消费次数前十的和金额  -->
+    <select id="getTenHeightList" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        SELECT usertable.`name`, orders.userid, COUNT(orders.userid) AS userNum, sum(orders.price) AS sumPrice
+        FROM orders INNER JOIN usertable
+            ON orders.userid = usertable.userId
+        GROUP BY orders.userid
+        HAVING COUNT(*) > 0
+        ORDER BY userNum DESC LIMIT 0, 10
+    </select>
+
+
 </mapper>
 
 

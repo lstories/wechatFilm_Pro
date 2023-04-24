@@ -29,6 +29,9 @@ public interface OrdersMapper {
     // 通过id删除
     void deleteOrdersById(Integer id);
 
+    // 查询排行帮，消费次数前十的和金额
+    List<OrdersVo> getTenHeightList();
+
     // 通过年份查找
 
 

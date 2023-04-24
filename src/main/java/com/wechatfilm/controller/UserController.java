@@ -108,8 +108,18 @@ public class UserController {
         return Result.success(users);
     }
 
+    // 分页功能
+    @GetMapping("/namePhone")
+    public Result usernamePhone(UserPageRequest userPageRequest) {
+        return Result.success(userService.usernamePhone(userPageRequest));
+    }
 
-
+    // 忘记密码
+    @PutMapping("/resetPwd")
+    public Result resetPwd(@RequestBody User user){
+        userService.resetPwd(user);
+        return Result.success();
+    }
 
 
 

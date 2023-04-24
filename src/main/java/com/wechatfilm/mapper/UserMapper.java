@@ -57,6 +57,12 @@ public interface UserMapper {
     // 23年注册数量
     List<User> getUserNum_23();
 
+    // 注册 查询 用户名、手机号
+    List<User> usernamePhone(UserPageRequest userPageRequest);
+
+    // 忘记密码
+    void resetPwd(User user);
+
 }
 
 

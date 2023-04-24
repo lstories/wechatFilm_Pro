@@ -23,6 +23,7 @@ public interface IOrdersService {
 
     void deleteOrdersById(Integer id);
 
-
+    // 查询前10个人
+    List<OrdersVo> getTenHeightList();
 
 }
