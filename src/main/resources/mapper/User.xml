@@ -49,7 +49,6 @@
         delete from usertable where userId = #{userId}
     </delete>
 
-
     <!--  登录  -->
     <select id="getByUserName" resultType="com.wechatfilm.entity.User">
         select * from usertable where username = #{username}
