@@ -20,7 +20,7 @@ public class CategoryController {
     @Autowired  // 注入
     ICategoryService categoryService;
 
-    // 用户列表
+    //
     @GetMapping("/list")
     public Result list() {
         List<Category> categories = categoryService.list();

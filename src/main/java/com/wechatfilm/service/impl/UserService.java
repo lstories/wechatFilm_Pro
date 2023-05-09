@@ -4,6 +4,7 @@ package com.wechatfilm.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wechatfilm.controller.request.UserLoginRequest;
+import com.wechatfilm.entity.Vo.UserVo;
 import com.wechatfilm.service.IUserService;
 import com.wechatfilm.Exception.ServiceException;
 import com.wechatfilm.controller.dto.UserLoginDTO;
@@ -141,6 +142,12 @@ public class UserService implements IUserService {
     @Override
     public void resetPwd(User user) {
         userMapper.resetPwd(user);
+    }
+
+    // 查询今年每个月注册的人数
+    @Override
+    public List<UserVo> getMonLogin() {
+        return userMapper.getMonLogin();
     }
 
 }

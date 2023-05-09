@@ -3,18 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 建立xml文件 -->
-
-<!--
-mapper层的路径放到 namespace
-id 是 方法名字,
-resultType 是对象 entity对应的实体类路径
--->
 <mapper namespace="com.wechatfilm.mapper.UserMapper">
     <!--  新增用户  -->
     <insert id="addUser">
-        insert into usertable(userId, name, username, password, age, sex, phone)
-        value (#{userId}, #{name}, #{username}, #{password}, #{age}, #{sex}, #{phone})
+        insert into usertable(userId, name, username, password, age, sex, phone, headpic)
+        value (#{userId}, #{name}, #{username}, #{password}, #{age}, #{sex}, #{phone}, #{headpic})
     </insert>
 
     <!--  注册  -->
@@ -23,7 +16,6 @@ resultType 是对象 entity对应的实体类路径
         value (#{userId}, #{name}, #{username}, #{password}, #{phone})
     </insert>
 
-
     <!--  查询用户列表  -->
     <select id="listUsers" resultType="com.wechatfilm.entity.User">
         select * from usertable order by userId desc
@@ -31,13 +23,16 @@ resultType 是对象 entity对应的实体类路径
 
     <!--  用户模糊查询  -->
     <select id="listByCondition" resultType="com.wechatfilm.entity.User">
-        select * from usertable
-            <where>
-                <if test="username != null and username != ''">
-                    username like concat('%', #{ username }, '%')
-                </if>
-            </where>
-        order by userId desc
+        SELECT usertable.*, COUNT(orders.id) AS order_count, COALESCE(SUM(orders.price), 0.00) AS sum_price
+        FROM usertable
+        LEFT JOIN orders ON usertable.userId = orders.userid
+        <where>
+            <if test="name != null and name != ''">
+                usertable.name like concat('%', #{ name }, '%')
+            </if>
+        </where>
+        GROUP BY usertable.userId
+        order by order_count desc
     </select>
     <!--  通过userId来查询  -->
     <select id="getByUserId" resultType="com.wechatfilm.entity.User">
@@ -46,7 +41,7 @@ resultType 是对象 entity对应的实体类路径
 
     <!--  通过id将修改后的数据, 更新到数据库  -->
     <update id="updateUserById">
-        update usertable set name = #{name}, password = #{password},sex = #{sex}, age = #{age}, phone = #{phone}
+        update usertable set name = #{name}, password = #{password},sex = #{sex}, age = #{age}, phone = #{phone}, headpic = #{headpic}
         where userId = #{userId}
     </update>
     <!--   通过Id删除用户  -->
@@ -107,33 +102,15 @@ resultType 是对象 entity对应的实体类路径
         set password = #{password}
         where username = #{username}
     </update>
+    <!--  查询今年每个月注册的人数  -->
+    <select id="getMonLogin" resultType="com.wechatfilm.entity.Vo.UserVo">
+        SELECT MONTH(createtime) AS logonMonth, COUNT(*) AS logonCount
+        FROM usertable
+        WHERE YEAR(createtime) = YEAR(CURDATE())
+        GROUP BY MONTH(createtime)
+        order by logonMonth ASC
+    </select>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

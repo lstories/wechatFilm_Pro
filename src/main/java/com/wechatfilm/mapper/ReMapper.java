@@ -1,36 +1,35 @@
 package com.wechatfilm.mapper;
 
 
-import com.wechatfilm.controller.request.BlogPageRequest;
 import com.wechatfilm.controller.request.OrdersRequest;
-import com.wechatfilm.entity.Vo.BlogVo;
+import com.wechatfilm.controller.request.ReRequest;
 import com.wechatfilm.entity.Vo.OrdersVo;
+import com.wechatfilm.entity.Vo.ReVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 
 @Mapper     // 使用Mapper注解,将这个注册为spring的一个bean
-public interface BlogVoMapper {
+public interface ReMapper {
 
     // 查询所有列表
-    List<BlogVo> listBlogVo();
+    List<ReVo> list();
 
     // 分页
-    List<BlogVo> listByCondition(BlogPageRequest blogPageRequest);
+    List<ReVo> listByCondition(ReRequest request);
 
-    // 新增
-    void addAnswer(BlogVo blogVo);
+    // 新增订单
+    void add(ReVo reVo);
 
     // 通过Id查询
-    BlogVo getByBlogId(Integer id);
+    ReVo getById(Integer reId);
 
     // 更新
-    void updateBlogVo(BlogVo blogVo);
+    void updateById(ReVo reVo);
 
     // 通过id删除
-    void deleteBlogVoById(Integer id);
-
+    void deleteById(Integer reId);
 
 
 }

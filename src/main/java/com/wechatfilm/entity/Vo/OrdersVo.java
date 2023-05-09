@@ -31,10 +31,10 @@ public class OrdersVo {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm") //接收时间类型
     private Date endtime;    // 创建时间
     private String captcha;     // 验证码
-    private Integer status;     // 订单状态
+    private String status;     // 订单状态
     private String comment;     // 评价
+    private String commented;   // 被回复
     private BigDecimal o_score;    // 评分
-
 
     private String name;    // 昵称
     private String filmName;    // 电影名称
@@ -44,5 +44,11 @@ public class OrdersVo {
 
     private Integer userNum;    // 购买次数
     private BigDecimal sumPrice;    // 总价格
+
+
+    private String day;   // 日期
+    private String month;   // 月份
+    private BigDecimal total_income;    // 价格
+
 
 }

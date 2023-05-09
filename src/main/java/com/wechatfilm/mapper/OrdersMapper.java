@@ -2,6 +2,7 @@ package com.wechatfilm.mapper;
 
 
 import com.wechatfilm.controller.request.OrdersRequest;
+import com.wechatfilm.entity.Film;
 import com.wechatfilm.entity.Vo.OrdersVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,8 +33,15 @@ public interface OrdersMapper {
     // 查询排行帮，消费次数前十的和金额
     List<OrdersVo> getTenHeightList();
 
-    // 通过年份查找
+    // 查询有评论的列表
+    List<OrdersVo> getComment(OrdersRequest ordersRequest);
 
+
+    // 周查询营业额
+    List<OrdersVo> getTurnover();
+
+    // 月营业额
+    List<OrdersVo> getMonTur();
 
 }
 

@@ -6,8 +6,8 @@
 <mapper namespace="com.wechatfilm.mapper.OrdersMapper">
     <!--  新增  -->
     <insert id="addOrders">
-        insert into orders(id, code, userid, filmid, roomid, price, brand, begintime, endtime, captcha, status, o_score, comment)
-        value (#{id}, #{code}, #{userid}, #{filmid}, #{roomid}, #{price}, #{brand}, #{begintime}, #{endtime}, #{captcha}, #{status}, #{o_score}, #{comment})
+        insert into orders(id, code, userid, filmid, roomid, price, brand, begintime, endtime, captcha, status, o_score, comment, commented)
+        value (#{id}, #{code}, #{userid}, #{filmid}, #{roomid}, #{price}, #{brand}, #{begintime}, #{endtime}, #{captcha}, #{status}, #{o_score}, #{comment}, #{commented})
     </insert>
     <!--  查询列表  -->
     <select id="listOrders" resultType="com.wechatfilm.entity.Vo.OrdersVo">
@@ -34,7 +34,7 @@
                     and o.userid like concat('%', #{userid}, '%')
                 </if>
                 <if test="status != null and status != ''">
-                    and o.status = #{status}
+                    and o.status like concat('%', #{status}, '%')
                 </if>
             </where>
         order by id desc
@@ -50,7 +50,7 @@
 
     <!--  通过id将修改后的数据, 更新到数据库  -->
     <update id="updateOrdersById">
-        update orders set status = #{status}, o_score = #{o_score}, comment = #{comment}
+        update orders set status = #{status}, o_score = #{o_score}, comment = #{comment}, commented = #{commented}
         where id = #{id}
     </update>
     <!--   通过Id删除  -->
@@ -60,12 +60,37 @@
 
     <!-- 查询排行帮，消费次数前十的和金额  -->
     <select id="getTenHeightList" resultType="com.wechatfilm.entity.Vo.OrdersVo">
-        SELECT usertable.`name`, orders.userid, COUNT(orders.userid) AS userNum, sum(orders.price) AS sumPrice
+        SELECT usertable.`name`, orders.userid, COUNT(orders.userid) AS userNum, SUM(orders.price) AS sumPrice
         FROM orders INNER JOIN usertable
             ON orders.userid = usertable.userId
         GROUP BY orders.userid
         HAVING COUNT(*) > 0
         ORDER BY userNum DESC LIMIT 0, 10
+    </select>
+
+    <!--  查询有的评论、id、用户名称  -->
+    <select id="getComment" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        SELECT o.*, u.name, f.filmName, r.styleBrand, r.spaceBrand from orders o
+            left join usertable u on u.userId = o.userid
+            left join film f on f.id = o.filmid
+            left join room r on r.id = o.roomid
+        WHERE o.comment IS NOT NULL
+    </select>
+
+    <!--  查询营业额  -->
+    <select id="getTurnover" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        SELECT DATE_FORMAT(o.createtime, '%m-%d') AS day, SUM(o.price) AS total_income
+        FROM orders o
+        WHERE YEARWEEK(o.createtime, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DATE_FORMAT(o.createtime, '%m-%d');
+    </select>
+
+    <!--  月营业额  -->
+    <select id="getMonTur" resultType="com.wechatfilm.entity.Vo.OrdersVo">
+        SELECT DATE_FORMAT(o.createtime, '%m') AS month, SUM(o.price) AS total_income
+        FROM orders o GROUP BY DATE_FORMAT(o.createtime, '%m')
+        order by month asc
+
     </select>
 
 

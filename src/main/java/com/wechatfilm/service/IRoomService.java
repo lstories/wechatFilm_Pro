@@ -26,4 +26,7 @@ public interface IRoomService {
     // 删除
     void deleteById(Integer id);
 
+    // 查询每个类型房间的消费金额
+    List<Room> price();
+
 }

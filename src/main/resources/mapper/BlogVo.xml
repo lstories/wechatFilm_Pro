@@ -3,46 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 建立xml文件 -->
-
-<!--
-mapper层的路径放到 namespace
-id 是 方法名字,
-resultType 是对象 entity对应的实体类路径
--->
 <mapper namespace="com.wechatfilm.mapper.BlogMapper">
     <!--  查询列表  -->
     <select id="listBlog" resultType="com.wechatfilm.entity.Vo.BlogVo">
-
+        SELECT answer.*, sendblog.*, u.name as blogName, u2.name as answerName, u.headpic as blogPic, u2.headpic as answerPic
+        FROM answer
+        left JOIN sendblog ON answer.bid = sendblog.blogId
+        left join usertable u on sendblog.uuid = u.userId
+        left join usertable u2 on answer.uid = u2.userId
     </select>
 
     <!--  分页查询  -->
     <select id="BlogPage" resultType="com.wechatfilm.entity.Vo.BlogVo">
+        select s.*, a.*, u.name as blogName, u.headpic as blogPic from sendblog s
+            left join usertable u on u.userId = s.uuid
+            left join answer a on a.bid = s.blogId
+        order by s.blogId desc
+    </select>
 
+    <!--  根据id查询  -->
+    <select id="getBlogById" resultType="com.wechatfilm.entity.Vo.BlogVo">
+        select  u.name as blogName, u.headpic as blogPic
+        from sendblog s
+            left join usertable u on u.userId = s.uuid
+#             left join answer a on a.bid = s.blogId
+        where s.blogId = #{blogId}
     </select>
 
     <!--  新增回帖  -->
     <insert id="addAnswer">
-
+        insert into answer(answerId, bid, uid, answerContent)
+            value (#{answerId}, #{bid}, #{uid}, #{answerContent})
     </insert>
     <!--  新增帖子  -->
     <insert id="addBlog">
-
+        insert into sendblog(blogId, sendTime, titleText, contentText, uuid)
+            value (#{blogId}, #{sendTime}, #{titleText}, #{contentText}, #{uuid})
     </insert>
 
     <!--  通过id删除帖子  -->
     <delete id="deleteBlog">
-
+        delete from sendblog where blogId = #{blogId}
     </delete>
 
     <!--  通过id删除回帖  -->
     <delete id="deleteAnswer">
-
+        delete from answer where answerId = #{answerId}
     </delete>
 
     <!--  修改帖子  -->
     <update id="updateBlog">
-
+        update sendblog set titleText = #{titleText}, contentText = #{contentText}
+        where blogId = #{bid}
     </update>
 
 

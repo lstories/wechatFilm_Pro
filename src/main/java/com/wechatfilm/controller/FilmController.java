@@ -3,6 +3,7 @@ package com.wechatfilm.controller;
 import com.wechatfilm.common.Result;
 import com.wechatfilm.controller.request.FilmPageRequest;
 import com.wechatfilm.entity.Film;
+import com.wechatfilm.entity.Vo.FilmVo;
 import com.wechatfilm.service.IFilmService;
 import com.wechatfilm.utils.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class FilmController {
     // 更新修改后的用户信息
     @PutMapping("/update")
     public Result update(@RequestBody Film film){
-        filmService.updateFilm(film);
+        filmService.updateById(film);
         return Result.success();
     }
 
@@ -87,11 +88,21 @@ public class FilmController {
     @GetMapping("/byCategory")
     public Result byCategory(FilmPageRequest filmPageRequest) {
         return Result.success(filmService.byCategory(filmPageRequest));
-
     }
 
+    // 查询每年电影比例
+    @GetMapping("/yearFilm")
+    public Result yearFilm() {
+        List<Film> films = filmService.yearFilm();
+        return Result.success(films);
+    }
 
-
+    // 查询今年每月新上映的电影数量
+    @GetMapping("/monthFilm")
+    public Result monthFilm() {
+        List<FilmVo> films = filmService.monthFilm();
+        return Result.success(films);
+    }
 
 
 }

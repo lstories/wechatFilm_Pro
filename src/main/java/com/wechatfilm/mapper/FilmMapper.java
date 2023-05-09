@@ -3,6 +3,7 @@ package com.wechatfilm.mapper;
 
 import com.wechatfilm.controller.request.FilmPageRequest;
 import com.wechatfilm.entity.Film;
+import com.wechatfilm.entity.Vo.FilmVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public interface FilmMapper {
     // 新增用户
     void addFilm(Film film);
 
+    void updateById(Film film);
+
     // 通过Id查询
     Film getByFilmId(Integer id);
 
@@ -38,6 +41,12 @@ public interface FilmMapper {
 
     List<Film> byCategory(FilmPageRequest filmPageRequest);
 
+
+    // 查询各年的电影比例
+    List<Film> yearFilm();
+
+    // 查询今年每月新上映的电影数量
+    List<FilmVo> monthFilm();
 
 }
 

@@ -27,9 +27,10 @@ public class Orders {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endtime;    // 创建时间
     private String captcha;     // 验证码
-    private Integer status;     // 订单状态
+    private String status;     // 订单状态
     private BigDecimal o_score;    // 评分
     private String comment;     // 评价
+    private String commented;   // 被回复
 
     private List<Film> films;
     private List<User> users;

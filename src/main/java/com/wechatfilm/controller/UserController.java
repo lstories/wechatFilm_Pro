@@ -6,6 +6,7 @@ import com.wechatfilm.controller.dto.UserLoginDTO;
 import com.wechatfilm.controller.request.UserLoginRequest;
 import com.wechatfilm.controller.request.UserPageRequest;
 import com.wechatfilm.entity.User;
+import com.wechatfilm.entity.Vo.UserVo;
 import com.wechatfilm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -122,7 +123,13 @@ public class UserController {
     }
 
 
-
+    // 查询今年每个月注册的人数
+    //    List<UserVo> getMonLogin();
+    @GetMapping("/getMonLogin")
+    public Result getMonLogin() {
+        List<UserVo> users = userService.getMonLogin();
+        return Result.success(users);
+    }
 
 
 

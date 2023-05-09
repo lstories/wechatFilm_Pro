@@ -28,9 +28,9 @@ public class Film {
     private BigDecimal score;    // 评分
     private String video;       // 视频
 
-    private List<String> categories;
 
-
+    private String year;    // 年份
+    private Integer movie_count;    // 电影数量
 
 
 }

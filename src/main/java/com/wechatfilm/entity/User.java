@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -23,4 +24,6 @@ public class User {
     private String phone;       // 电话
     private String headpic;     // 头像
 
+    private Integer order_count;    // 每个用户订单数
+    private BigDecimal sum_price;   // 每个用户总金额
 }

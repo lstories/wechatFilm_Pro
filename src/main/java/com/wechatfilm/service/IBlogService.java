@@ -14,6 +14,9 @@ public interface IBlogService {
     // 分页
     PageInfo<BlogVo> BlogPage(BaseRequest baseRequest);
 
+    // 根据id查询
+    BlogVo getBlogById(Integer blogId);
+
     // 添加新回帖
     void addAnswer(BlogVo blogVo);
 

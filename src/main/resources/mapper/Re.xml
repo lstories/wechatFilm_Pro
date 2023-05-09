@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wechatfilm.mapper.ReMapper">
+    <!--  新增  -->
+    <insert id="add">
+        insert into reservation(reId, roomId, beginTime, endTime, personNum, filmId, reStatus)
+        value (#{reId}, #{roomId}, #{beginTime}, #{endTime}, #{personNum}, #{filmId}, #{reStatus})
+    </insert>
+    <!--  查询列表  -->
+    <select id="list" resultType="com.wechatfilm.entity.Vo.ReVo">
+        select re.reId, re.beginTime, re.endTime, re.personNum, re.reStatus, re.filmId, f.filmName, f.pic, r.id, r.spaceBrand, r.styleBrand from reservation re
+            left join film f on f.id = re.filmid
+            left join room r on r.id = re.roomid
+    </select>
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatfilm.entity.Vo.ReVo">
+        select re.reId, re.beginTime, re.endTime, re.personNum, re.reStatus, re.filmId, re.roomId, f.filmName, f.pic, r.spaceBrand, r.styleBrand from reservation re
+        left join film f on f.id = re.filmid
+        left join room r on r.id = re.roomid
+            <where>
+                <if test="filmName != null and filmName != ''">
+                    f.filmName like concat('%', #{filmName}, '%')
+                </if>
+            </where>
+        order by reId desc
+    </select>
+    <!--  通过Id来查询  -->
+    <select id="getById" resultType="com.wechatfilm.entity.Vo.ReVo">
+        select o.*, u.name, f.filmName, r.styleBrand, r.spaceBrand from orders o
+            left join usertable u on u.userId = o.userid
+            left join film f on f.id = o.filmid
+            left join room r on r.id = o.roomid
+        where o.id = #{id}
+    </select>
+
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update orders set status = #{status}, o_score = #{o_score}, comment = #{comment}, commented = #{commented}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除  -->
+    <delete id="deleteById">
+        delete from orders where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

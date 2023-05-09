@@ -4,6 +4,8 @@ package com.wechatfilm.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wechatfilm.entity.Category;
+import com.wechatfilm.entity.Vo.FilmVo;
 import com.wechatfilm.service.IFilmService;
 import com.wechatfilm.controller.request.FilmPageRequest;
 import com.wechatfilm.entity.Film;
@@ -36,18 +38,14 @@ public class FilmService implements IFilmService {
     // 新增
     @Override
     public void addFilm(Film film) {
-        film.setCategory(category(film.getCategories()));
         filmMapper.addFilm(film);
     }
 
-    private String category(List<String> categories) {
-        StringBuilder sb = new StringBuilder();
-        if (CollUtil.isNotEmpty(categories)) {
-            categories.forEach(v -> sb.append(v).append(">"));
-            return sb.substring(0, sb.lastIndexOf(">"));
-        }
-        return sb.toString();
+    @Override
+    public void updateById(Film film) {
+        filmMapper.updateById(film);
     }
+
 
     // 查询当前id的信息
     @Override
@@ -55,12 +53,7 @@ public class FilmService implements IFilmService {
         return filmMapper.getByFilmId(id);
     }
 
-    // 修改信息后更新
-    @Override
-    public void updateFilm(Film film) {
-        film.setCategory(category(film.getCategories()));
-        filmMapper.updateFilmById(film);
-    }
+
 
     // 删除
     @Override
@@ -88,6 +81,18 @@ public class FilmService implements IFilmService {
         PageHelper.startPage(filmPageRequest.getPageNum(), filmPageRequest.getPageSize());
         List<Film> films = filmMapper.filmsCategory(filmPageRequest);// 按条件查找
         return new PageInfo<>(films);
+    }
+
+    // 查询每年电影比例
+    @Override
+    public List<Film> yearFilm() {
+        return filmMapper.yearFilm();
+    }
+
+    // 查询今年每月新上映的电影数量
+    @Override
+    public List<FilmVo> monthFilm() {
+        return filmMapper.monthFilm();
     }
 
 }

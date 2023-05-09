@@ -5,11 +5,6 @@
 
 <!-- 建立xml文件 -->
 
-<!--
-mapper层的路径放到 namespace
-id 是 方法名字,
-resultType 是对象 entity对应的实体类路径
--->
 <mapper namespace="com.wechatfilm.mapper.CategoryMapper">
     
     <resultMap id="categoryMap" type="com.wechatfilm.entity.Category">
@@ -33,14 +28,12 @@ resultType 是对象 entity对应的实体类路径
                 and (c1.name like concat('%', #{ name }, '%') or c2.name like concat('%', #{ name }, '%'))
             </if>
         </where>
-        group by c1.id
-        order by c1.id desc
     </select>
 
     <!--  新增  -->
     <insert id="add">
-        insert into category(id, name, remark, pid)
-        value (#{id}, #{name}, #{remark}, #{pid})
+        insert into category(id, name, remark)
+        value (#{id}, #{name}, #{remark})
     </insert>
     <!--  查询列表  -->
     <select id="list" resultType="com.wechatfilm.entity.Category">

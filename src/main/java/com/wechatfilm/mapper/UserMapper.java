@@ -3,6 +3,7 @@ package com.wechatfilm.mapper;
 
 import com.wechatfilm.controller.request.UserPageRequest;
 import com.wechatfilm.entity.User;
+import com.wechatfilm.entity.Vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -62,6 +63,9 @@ public interface UserMapper {
 
     // 忘记密码
     void resetPwd(User user);
+
+    // 查询今年每个月注册的人数
+    List<UserVo> getMonLogin();
 
 }
 

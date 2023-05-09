@@ -21,5 +21,6 @@ public class Room {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate createTime;    // 创建时间
 
+    private BigDecimal total_amount;    // 总价格
 
 }

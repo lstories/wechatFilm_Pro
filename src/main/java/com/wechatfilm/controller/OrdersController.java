@@ -3,6 +3,7 @@ package com.wechatfilm.controller;
 
 import com.wechatfilm.common.Result;
 import com.wechatfilm.controller.request.OrdersRequest;
+import com.wechatfilm.entity.Film;
 import com.wechatfilm.entity.Vo.OrdersVo;
 import com.wechatfilm.service.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,25 @@ public class OrdersController {
          return Result.success(ordersService.getTenHeightList());
     }
 
+    // 查询有评论的列表
+    @GetMapping("/comment")
+    public Result getComment(OrdersRequest ordersRequest) {
+        return Result.success(ordersService.getComment(ordersRequest));
+    }
 
+    // 查询营业额
+    @GetMapping("/getTurnover")
+    public Result getTurnover() {
+        List<OrdersVo> ordersVos = ordersService.getTurnover();
+        return Result.success(ordersVos);
+    }
+
+    // 月营业额
+    @GetMapping("/getMonTur")
+    public Result getMonTur() {
+        List<OrdersVo> ordersVos = ordersService.getMonTur();
+        return Result.success(ordersVos);
+    }
 
 
 }

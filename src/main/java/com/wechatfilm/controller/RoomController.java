@@ -59,4 +59,11 @@ public class RoomController {
         return Result.success();
     }
 
+    // 查询每个类型房间的消费金额
+    @GetMapping("/price")
+    public Result price() {
+        List<Room> rooms = roomService.price();
+        return Result.success(rooms);
+    }
+
 }

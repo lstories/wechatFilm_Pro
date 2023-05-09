@@ -5,11 +5,6 @@
 
 <!-- 建立xml文件 -->
 
-<!--
-mapper层的路径放到 namespace
-id 是 方法名字,
-resultType 是对象 entity对应的实体类路径
--->
 <mapper namespace="com.wechatfilm.mapper.RoomMapper">
 
     <!--  模糊查询  -->
@@ -60,6 +55,12 @@ resultType 是对象 entity对应的实体类路径
         delete from room where id = #{id}
     </delete>
 
+    <!--  查询每个类型房间的消费金额
+     SELECT r.styleBrand, SUM(DISTINCT o.price) AS total_amount FROM orders o left join room r ON r.id = o.roomid GROUP BY r.styleBrand;
+     -->
+    <select id="price" resultType="com.wechatfilm.entity.Room">
+        SELECT r.styleBrand, SUM(DISTINCT o.price) AS total_amount FROM orders o left join room r ON r.id = o.roomid GROUP BY r.styleBrand;
+    </select>
 
 </mapper>
 

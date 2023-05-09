@@ -58,5 +58,11 @@ public class RoomService implements IRoomService {
         roomMapper.deleteById(id);
     }
 
+    // 查询每个类型房间的消费金额
+    @Override
+    public List<Room> price() {
+        return roomMapper.price();
+    }
+
 
 }

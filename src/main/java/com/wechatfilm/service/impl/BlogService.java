@@ -33,6 +33,12 @@ public class BlogService implements IBlogService {
         return new PageInfo<>(blogVos);
     }
 
+    // 根据id查询
+    @Override
+    public BlogVo getBlogById(Integer blogId) {
+        return blogMapper.getBlogById(blogId);
+    }
+
     // 新增回帖
     @Override
     public void addAnswer(BlogVo blogVo) {
@@ -48,17 +54,13 @@ public class BlogService implements IBlogService {
     // 通过id删除帖子
     @Override
     public void deleteBlog(Integer bid) {
-
+        blogMapper.deleteBlog(bid);
     }
     // 通过answerId删除回帖
     @Override
     public void deleteAnswer(Integer answerId) {
-
+        blogMapper.deleteAnswer(answerId);
     }
-
-
-
-
 
 
 

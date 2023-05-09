@@ -26,4 +26,12 @@ public interface IOrdersService {
     // 查询前10个人
     List<OrdersVo> getTenHeightList();
 
+    // 查询有评论的列表
+    Object getComment(OrdersRequest ordersRequest);
+
+    // 查询营业额
+    List<OrdersVo> getTurnover();
+
+    // 月营业额
+    List<OrdersVo> getMonTur();
 }
