@@ -29,7 +29,7 @@ public interface SwiperMapper {
     // 通过Id删除
     void updateById(Swiper swiper);
 
-    void deleteById(Integer id);
+//    void deleteById(Integer id);
 }
 
 
